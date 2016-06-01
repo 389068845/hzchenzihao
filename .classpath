@@ -22,5 +22,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/hzchenzihao/Downloads/org.apache.commons.codec-1.8 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/hzchenzihao/Downloads/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hzchenzihao/Desktop/owasp-java-html-sanitizer-20160413.1.jar" sourcepath="C:/Users/hzchenzihao/Desktop/owasp-java-html-sanitizer-20160413.1-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

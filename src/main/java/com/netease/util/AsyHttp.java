@@ -10,6 +10,7 @@ import org.apache.http.nio.client.methods.AsyncCharConsumer;
 import org.apache.http.nio.client.methods.HttpAsyncMethods;
 import org.apache.http.nio.protocol.HttpAsyncRequestProducer;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.nio.CharBuffer;
@@ -36,16 +37,14 @@ public class AsyHttp
 
 			// One most likely would want to use a callback for operation result
 			final CountDownLatch latch1 = new CountDownLatch(1);
-			final HttpGet request2 = new HttpGet("http://www.apache.org/");
+			final HttpGet request2 = new HttpGet("http://epay.163.com/ewallet_app_api/v1/device_activate.htm");
 			FutureCallbackInfo info = new FutureCallbackInfo();
 			info.setUrl("ww.b");
-//			info.setLatch1(latch1);
-			httpclient.execute(request2, (FutureCallback<HttpResponse>) info);
-			System.out.println("request 2 excuteded");
-			//			latch1.await();
+			info.setLatch1(latch1);
+			Future<HttpResponse> respon = httpclient.execute(request2, (FutureCallback<HttpResponse>) info);
 
-			// In real world one most likely would also want to stream
-			// request and response body content
+
+//						latch1.await();
 			final CountDownLatch latch2 = new CountDownLatch(1);
 			final HttpGet request3 = new HttpGet("http://www.apache.org/");
 			HttpAsyncRequestProducer producer3 = HttpAsyncMethods.create(request3);
@@ -100,11 +99,14 @@ public class AsyHttp
 			});
 			latch2.await();
 
+			System.out.println("request 2 excuteded:"  + EntityUtils.toString(respon.get().getEntity()));
+
 		}
 		finally
 		{
 			httpclient.close();
 		}
+
 	}
 
 }

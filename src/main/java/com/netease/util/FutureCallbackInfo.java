@@ -39,15 +39,7 @@ public class FutureCallbackInfo implements FutureCallback
 	{
 		final HttpResponse response2 = (HttpResponse) o;
 		System.out.println(url + "request 2 start");
-		try
-		{
-			Thread.sleep(2000);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-//		latch1.countDown();
+		latch1.countDown();
 		System.out.println(url + "request 2" + response2.getStatusLine() + Thread.currentThread());
 	}
 

@@ -9,11 +9,16 @@
  */
 package com.netease.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,16 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.CoreConnectionPNames;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -64,7 +59,7 @@ public class HttpUtil
 		HttpClient httpClient = new DefaultHttpClient();
 		try
 		{
-			HttpPost httpPost = new HttpPost(url);
+			HttpGet httpPost = new HttpGet(url);
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			for (Map.Entry<String, String> entry : params.entrySet())
 			{
@@ -74,7 +69,7 @@ public class HttpUtil
 			nameValuePairs.add(new BasicNameValuePair(CoreConnectionPNames.CONNECTION_TIMEOUT, "50000"));
 			// 读取超时
 			nameValuePairs.add(new BasicNameValuePair(CoreConnectionPNames.SO_TIMEOUT, "50000"));
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "GBK"));
+//			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "GBK"));
 			HttpResponse response = httpClient.execute(httpPost);
 			if (response.getStatusLine().getStatusCode() == 200)
 			{
@@ -141,7 +136,7 @@ public class HttpUtil
 			HttpURLConnection httpURLConnection = (HttpURLConnection) webURL.openConnection();
 			httpURLConnection.setDoOutput(true);// 打开写入属性  
 			httpURLConnection.setDoInput(true);// 打开读取属性  
-			httpURLConnection.setRequestMethod("POST");// 设置提交方法  
+			httpURLConnection.setRequestMethod("GET");// 设置提交方法
 			httpURLConnection.setConnectTimeout(50000);// 连接超时时间  
 			httpURLConnection.setReadTimeout(50000);
 			httpURLConnection.connect();

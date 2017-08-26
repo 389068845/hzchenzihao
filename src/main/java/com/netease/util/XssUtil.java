@@ -11,11 +11,11 @@ package com.netease.util;
 
 import java.io.IOException;
 
-import org.owasp.html.Handler;
-import org.owasp.html.HtmlSanitizer;
-import org.owasp.html.HtmlStreamRenderer;
-import org.owasp.html.examples.EbayPolicyExample;
-import org.springframework.util.StringUtils;
+//import org.owasp.html.Handler;
+//import org.owasp.html.HtmlSanitizer;
+//import org.owasp.html.HtmlStreamRenderer;
+//import org.owasp.html.examples.EbayPolicyExample;
+//import org.springframework.util.StringUtils;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -30,29 +30,29 @@ public class XssUtil
 	
 	
 	  
-	public static void main(String[] args)
-	{
-		String html = "pc_identify\"><img src=x onerror=alert(1)//";
-		System.out.println(stripXss(html));
-	}
-	
-	public static String stripXss(String html){
-		if(StringUtils.isEmpty(html)){
-			return "";
-		}
-		StringBuilder sb = new StringBuilder();
-		HtmlStreamRenderer renderer = HtmlStreamRenderer.create(sb, new Handler<IOException>(){
-			public void handle(IOException e){
-				
-			}
-		},new Handler<String>(){
-			public void handle(String s){
-				
-			}
-		});
-		HtmlSanitizer.sanitize(html, EbayPolicyExample.POLICY_DEFINITION.apply(renderer));
-		return html;
-	}
+//	public static void main(String[] args)
+//	{
+//		String html = "pc_identify\"><img src=x onerror=alert(1)//";
+//		System.out.println(stripXss(html));
+//	}
+//
+//	public static String stripXss(String html){
+//		if(StringUtils.isEmpty(html)){
+//			return "";
+//		}
+//		StringBuilder sb = new StringBuilder();
+//		HtmlStreamRenderer renderer = HtmlStreamRenderer.create(sb, new Handler<IOException>(){
+//			public void handle(IOException e){
+//
+//			}
+//		},new Handler<String>(){
+//			public void handle(String s){
+//
+//			}
+//		});
+//		HtmlSanitizer.sanitize(html, EbayPolicyExample.POLICY_DEFINITION.apply(renderer));
+//		return html;
+//	}
 	
 	
 }
